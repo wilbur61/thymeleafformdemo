@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+<div class="m-4">
+    <h3 class="mb-4">Default Placement of Radio Buttons</h3>
+    <div class="row">
+        <div class="col-12">
+            <form th:action="@{/radio-selection}" method="post">
+                <div class="form-check mb-3">
+                    <input type="radio" class="form-check-input" name="gender" id="radioMale"
+                           th:checked="${selection.gender} == 'Male'"
+                           th:value="'Male'">
+                    <label class="form-check-label" for="radioMale">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="gender" id="radioFemale"
+                           th:checked="${selection.gender} == 'Female'"
+                           th:value="'Female'">
+                    <label class="form-check-label" for="radioFemale">Female</label>
+                </div>
+
+                <button type="submit">Submit</button>
+
+            </form>
+        </div>
+    </div>
+    <hr>
+</div>
+</body>
+</html>
+
