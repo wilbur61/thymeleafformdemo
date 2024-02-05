@@ -7,4 +7,5 @@
 # Step 1.  Make sure the Login form is working ( Bring up a browser on localhost:8080 )
 
 # Step 3. What you need to do: 
-#         Create code needed to get a registration form working just like login form works
+#         1.Create code needed to get a registration form working just like login form works
+#         2.Add another project type called Finance 
