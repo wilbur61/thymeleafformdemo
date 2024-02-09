@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcمنىB-4i/zRJBtt9X0aU9IEHZmSlF0M0gJRIFwJSmmQ6QA/I3k/OSBuKSl3eZt4" crossorigin="anonymous">
+</head>
+<body>
+<h1>Product List</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Product ID</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody id="product-list"></tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2ePHkLSgS//TjgX1e5+eSbRjTvtpj4g1kTRPxQzU8xoe4e0tN/dKq" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/re+PWEHsjs7pH3SXvajyT+tiI66xXEHvCYbpR7Yz9WcD6+9tjxY6Ll/vZ1QkIN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4q/fwzC1P+5yQfQRrsI/MgzKOa7Ag4rPm3QJEgZrhGC0xzwz5mDh3U26LLw1qV" crossorigin="anonymous"></script>
+<script>
+  function displayProducts(products) {
+    const productList = document.getElementById("product-list");
+    productList.innerHTML = "";
+
+    for (const product of products) {
+      const tableRow = document.createElement("tr");
+      const idCell = document.createElement("td");
+      const descriptionCell = document.createElement("td");
+      const priceCell = document.createElement("td");
+
+      idCell.textContent = product.id;
+      descriptionCell.textContent = product.description;
+      priceCell.textContent = `$${product.price}`;
+
+      tableRow.appendChild(idCell);
+      tableRow.appendChild(descriptionCell);
+      tableRow.appendChild(priceCell);
+
+      productList.appendChild(tableRow);
+    }
+  }
+
+  fetch("/products")
+          .then(response => response.json())
+          .then(products => displayProducts(products))
+          .catch(error => console.error(error));
+</script>
+</body>
+</html>

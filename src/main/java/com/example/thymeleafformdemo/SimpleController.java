@@ -2,15 +2,22 @@ package com.example.thymeleafformdemo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class SimpleController {
-	
-	   @GetMapping("/login")
+
+		@GetMapping("/displayCss")
+		public String showForm(){
+			System.out.println("Show the Form!!");
+			return("HelloCss");
+		}
+	@GetMapping("/getproducts")
+	public String showForm2(){
+		System.out.println("Show the Form!!");
+		return("getprodBS");
+	}
+		@GetMapping("/login")
 	    public String loginForm(Model model) {
 
 	        model.addAttribute("mylogin", new LoginPOJO());
@@ -45,4 +52,18 @@ public class SimpleController {
 		model.addAttribute("selectedGender", gender);
 		return "radio-selection"; // Redirect or return view name
 	}
+
+	@GetMapping("/greeting")
+	public String greeting(Model model) {
+		//model.addAttribute("greetingMessage", "Hello from Spring and Thymeleaf!");
+		return "greeting";
+	}
+
+	@RequestMapping(value = "/greeting/message", method = RequestMethod.GET)
+	public String getGreetingMessage(Model model) {
+		model.addAttribute("greetingMessage", "Hello from Spring and Thymeleaf!");
+		return "greetingMessage"; // Return a simple template with only the message
+	}
+
+
 }

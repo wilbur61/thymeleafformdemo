@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring - Thymeleaf - JavaScript Example</title>
+</head>
+<body>
+
+<h1 id="greetingMessage">Loading…</h1>
+
+<button id="alertButton">Alert Message</button>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function alertMessage() {
+        // Fetch the greeting message dynamically using AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                if (this.status === 200) {
+                    const greetingMessage = this.responseText;
+                    document.getElementById("greetingMessage").innerText = greetingMessage;
+                    alert("JavaScript triggered! The message is: " + greetingMessage);
+                } else {
+                    console.error("Error fetching greeting message:", this.statusText);
+                }
+            }
+        };
+        xhr.open("GET", "/greeting/message", true);
+        xhr.send();
+    }
+
+    document.getElementById("alertButton").addEventListener("click", alertMessage);
+    /*]]>*/
+</script>
+
+</body>
+</html>
