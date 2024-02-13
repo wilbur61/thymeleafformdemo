@@ -17,12 +17,16 @@ public class SimpleController {
 		System.out.println("Show the Form!!");
 		return("getprodBS");
 	}
-		@GetMapping("/login")
-	    public String loginForm(Model model) {
-
+	@GetMapping("/addproducts")
+	public String showForm3(){
+		System.out.println("Show create-product Form!!");
+		return("create-product");
+	}
+	@GetMapping("/login")
+	public String loginForm(Model model) {
 	        model.addAttribute("mylogin", new LoginPOJO());
 	        return "create-login";
-	    }
+		}
 
 	    @PostMapping("/save-login")
 	    public String saveLoginSubmission(Model model, LoginPOJO mylogin) {
@@ -35,7 +39,7 @@ public class SimpleController {
 	    }
 	@ModelAttribute
 	public GenderSelection selection() {
-		return new GenderSelection(); // Initialize with default gender (optional)
+			return new GenderSelection(); // Initialize with default gender (optional)
 	}
 
 	@GetMapping("/radio-buttons")
