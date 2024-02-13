@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Product</title>
+</head>
+<body>
+<h1>Create Product</h1>
+<div id="product-form">
+    <label for="product-id">Product ID:</label>
+    <input type="number" id="product-id" required><br><br>
+
+    <label for="product-description">Description:</label>
+    <input type="text" id="product-description" required><br><br>
+
+    <label for="product-price">Price:</label>
+    <input type="number" step="0.01" id="product-price" required><br><br>
+
+    <button type="button" id="create-product-button">Create Product</button>
+</div>
+
+<div id="message"></div> <script>
+    const createProductButton = document.getElementById("create-product-button");
+    const messageElement = document.getElementById("message");
+
+    createProductButton.addEventListener("click", () => {
+        const productId = parseInt(document.getElementById("product-id").value);
+        const productDescription = document.getElementById("product-description").value;
+        const productPrice = parseFloat(document.getElementById("product-price").value);
+
+        const product = {
+            id: productId,
+            description: productDescription,
+            price: productPrice
+        };
+
+        fetch("/create-product", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(product)
+        })
+            .then(response => response.json())
+            .then(() => {
+                // Display success message
+                messageElement.textContent = "Product created successfully!";
+                // Optionally clear form or trigger other actions
+            })
+        .catch(error => {
+            if (error.message !== "Unexpected end of JSON input") {
+                // Handle other errors
+                messageElement.textContent = `Error creating product: ${error.message}`;
+            } else {
+                // Ignore false error and proceed
+                messageElement.textContent = "Product created successfully!";
+                // Clear message after 5 seconds
+                setTimeout(() => {
+                    messageElement.textContent = "";
+                }, 3000);
+            }
+        });
+    });
+</script>
+</body>
+</html>
